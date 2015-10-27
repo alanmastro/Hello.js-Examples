@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello.js App</title>
+
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="bower_components/ng-prettyjson/dist/ng-prettyjson.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="bower_components/hello/dist/hello.all.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="bower_components/ng-prettyjson/dist/ng-prettyjson.min.js"></script>
+
+    <script type="text/javascript" src="js/app.js"></script>
+</head>
+<body ng-app="helloApp" ng-controller="mainController">
+    <div class="page-header">
+        <h1>Hello.js <small>Demo</small></h1>
+    </div>
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#facebook" aria-controls="facebook" role="tab" data-toggle="tab">Facebook</a></li>
+        <li role="presentation"><a href="#instagram" aria-controls="instagram" role="tab" data-toggle="tab">Instagram</a></li>
+        <li role="presentation"><a href="#flickr" aria-controls="flickr" role="tab" data-toggle="tab">Flickr</a></li>
+    </ul>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="facebook">
+            <p>&nbsp;</p>
+            <div class="well">
+                <button type="button" class="btn btn-primary" ng-hide="loginStatus['facebook']" ng-click="socialLogin('facebook')">Facebook Login</button>
+                <button type="button" class="btn btn-danger" ng-show="loginStatus['facebook']" ng-click="socialLogout('facebook')">Facebook Logout</button>
+
+                <button type="button" class="btn btn-success" ng-click="getPhotos('facebook')">Get Facebook Photos</button>
+                <button type="button" class="btn btn-warning" ng-click="getAlbums('facebook')">Get Facebook Albums</button>
+            </div>
+            <div class="alert alert-info" role="alert">Replace the app id inside app.js to use your facebook app</div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="instagram">
+            <p>&nbsp;</p>
+            <div class="well">
+                <button type="button" class="btn btn-primary" ng-hide="loginStatus['instagram']" ng-click="socialLogin('instagram')">Instagram Login</button>
+                <button type="button" class="btn btn-danger" ng-show="loginStatus['instagram']" ng-click="socialLogout('instagram')">Instagram Logout</button>
+
+                <button type="button" class="btn btn-success" ng-click="getPhotos('instagram')">Get Instagram Photos</button>
+            </div>
+            <div class="alert alert-info" role="alert">Replace the app id inside app.js to use your instagram app</div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="flickr">
+            <p>&nbsp;</p>
+            <div class="well">
+                <button type="button" class="btn btn-primary" ng-hide="loginStatus['flickr']" ng-click="socialLogin('flickr')">Flickr Login</button>
+                <button type="button" class="btn btn-danger" ng-show="loginStatus['flickr']" ng-click="socialLogout('flickr')">Flickr Logout</button>
+
+                <button type="button" class="btn btn-success" ng-click="getPhotos('flickr')">Get Flickr Photos</button>
+                <button type="button" class="btn btn-warning" ng-click="getAlbums('flickr')">Get Flickr Albums</button>
+            </div>
+            <div class="alert alert-info" role="alert">Replace the app id inside app.js to use your Flickr app. Remember to properly configure the server Proxy OAuth with the correct id and secret flickr app</div>
+        </div>
+    </div>
+    <div class="alert alert-danger" ng-show="errorMessage" role="alert">{{errorMessage}}</div>
+    <div class="row">
+        <div class="col-xs-6 col-md-3" ng-repeat="image in imagesList">
+            <a href="#" class="thumbnail">
+                <img ng-src="{{image}}">
+            </a>
+        </div>
+    </div>
+    <pre pretty-json="returnJson" ng-show="returnJson" />
+</body>
+</html>
