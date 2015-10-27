@@ -4,10 +4,11 @@ helloApp.run(function() {
     hello.init({
         facebook: '210641105765847',
         instagram: 'fc65ed255535461f89048a88735846a1',
-        flickr: '3ea86a3e6b1e167680797d8ebfd525eb'
+        flickr: '3ea86a3e6b1e167680797d8ebfd525eb',
+        google: '1072689331864-6fsm2131n4usogovpoektqvpemhjihcf.apps.googleusercontent.com'
     }, {
-        redirect_uri: 'redirect.html',
-        oauth_proxy: 'http://localhost:3000/oauth'
+        scope: 'friends,photos,email',
+        redirect_uri: 'redirect.html'
     });
 });
 

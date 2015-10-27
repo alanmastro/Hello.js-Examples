@@ -25,6 +25,7 @@
         <li role="presentation" class="active"><a href="#facebook" aria-controls="facebook" role="tab" data-toggle="tab">Facebook</a></li>
         <li role="presentation"><a href="#instagram" aria-controls="instagram" role="tab" data-toggle="tab">Instagram</a></li>
         <li role="presentation"><a href="#flickr" aria-controls="flickr" role="tab" data-toggle="tab">Flickr</a></li>
+        <li role="presentation"><a href="#google" aria-controls="google" role="tab" data-toggle="tab">Google</a></li>
     </ul>
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="facebook">
@@ -57,7 +58,15 @@
                 <button type="button" class="btn btn-success" ng-click="getPhotos('flickr')">Get Flickr Photos</button>
                 <button type="button" class="btn btn-warning" ng-click="getAlbums('flickr')">Get Flickr Albums</button>
             </div>
-            <div class="alert alert-info" role="alert">Replace the app id inside app.js to use your Flickr app. Remember to properly configure the server Proxy OAuth with the correct id and secret flickr app</div>
+            <div class="alert alert-info" role="alert">Replace the app id inside app.js to use your Flickr app. Remember to properly configure the server Proxy OAuth with the correct id and secret flickr app.</div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="google">
+            <p>&nbsp;</p>
+            <div class="well">
+                <button type="button" class="btn btn-primary" ng-hide="loginStatus['google']" ng-click="socialLogin('google')">Google Login</button>
+                <button type="button" class="btn btn-danger" ng-show="loginStatus['google']" ng-click="socialLogout('google')">Google Logout</button>
+            </div>
+            <div class="alert alert-info" role="alert">Replace the app id inside app.js to use your Google app.</div>
         </div>
     </div>
     <div class="alert alert-danger" ng-show="errorMessage" role="alert">{{errorMessage}}</div>
