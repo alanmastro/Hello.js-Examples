@@ -53,7 +53,7 @@ helloApp.controller('mainController', ['$scope', function($scope) {
         hello(provider).api(apiCall, apiParams).then(function(json) {
             $scope.returnJson = json;
             $scope.errorMessage = '';
-            $scope.parsePhotosStructure(provider, json.data);
+            $scope.parseThumbnailStructure(json.data);
             $scope.$apply();
         }, function(e) {
             $scope.errorMessage = e.error.message;
@@ -65,6 +65,7 @@ helloApp.controller('mainController', ['$scope', function($scope) {
         hello(provider).api('me/albums').then(function(json) {
             $scope.returnJson = json;
             $scope.errorMessage = '';
+            $scope.parseThumbnailStructure(json.data);
             $scope.$apply();
         }, function(e) {
             $scope.errorMessage = e.error.message;
@@ -72,11 +73,25 @@ helloApp.controller('mainController', ['$scope', function($scope) {
         });
     };
 
-    $scope.parsePhotosStructure = function(provider, photos) {
+    $scope.getFriends = function(provider) {
+        hello(provider).api('me/friends', {limit: 10}).then(function(json) {
+            $scope.returnJson = json;
+            $scope.errorMessage = '';
+            $scope.parseThumbnailStructure(json.data);
+            $scope.$apply();
+        }, function(e) {
+            $scope.errorMessage = e.error.message;
+            $scope.$apply();
+        });
+    };
+
+    $scope.parseThumbnailStructure = function(items) {
         $scope.imagesList = [];
 
-        photos.forEach(function(photo) {
-            $scope.imagesList.push(photo.thumbnail);
+        items.forEach(function(item) {
+            if (item.thumbnail !== undefined) {
+                $scope.imagesList.push(item.thumbnail);
+            }
         });
     }
 }]);

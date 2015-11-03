@@ -36,6 +36,7 @@
 
                 <button type="button" class="btn btn-success" ng-click="getPhotos('facebook')">Get Facebook Photos</button>
                 <button type="button" class="btn btn-warning" ng-click="getAlbums('facebook')">Get Facebook Albums</button>
+                <button type="button" class="btn btn-info" ng-click="getFriends('facebook')">Get Facebook Friends</button>
             </div>
             <div class="alert alert-info" role="alert">Replace the app id inside app.js to use your facebook app</div>
         </div>
@@ -46,6 +47,7 @@
                 <button type="button" class="btn btn-danger" ng-show="loginStatus['instagram']" ng-click="socialLogout('instagram')">Instagram Logout</button>
 
                 <button type="button" class="btn btn-success" ng-click="getPhotos('instagram')">Get Instagram Photos</button>
+                <button type="button" class="btn btn-info" ng-click="getFriends('instagram')">Get Instagram Friends</button>
             </div>
             <div class="alert alert-info" role="alert">Replace the app id inside app.js to use your instagram app</div>
         </div>
@@ -65,6 +67,8 @@
             <div class="well">
                 <button type="button" class="btn btn-primary" ng-hide="loginStatus['google']" ng-click="socialLogin('google')">Google Login</button>
                 <button type="button" class="btn btn-danger" ng-show="loginStatus['google']" ng-click="socialLogout('google')">Google Logout</button>
+
+                <button type="button" class="btn btn-info" ng-click="getFriends('google')">Get Google Friends</button>
             </div>
             <div class="alert alert-info" role="alert">Replace the app id inside app.js to use your Google app.</div>
         </div>

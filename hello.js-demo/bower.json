@@ -25,5 +25,8 @@
     "hello": "~1.9.6",
     "bootstrap": "~3.3.5",
     "ng-prettyjson": "~0.1.9"
+  },
+  "resolutions": {
+    "angular": "~1.4.7"
   }
 }
