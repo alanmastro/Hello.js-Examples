@@ -51,10 +51,33 @@ helloApp.controller('mainController', ['$scope', function($scope) {
         var apiParams = (userId !== undefined) ? {id: userId} : {};
 
         hello(provider).api(apiCall, apiParams).then(function(json) {
-            $scope.returnJson = json;
             $scope.errorMessage = '';
-            $scope.parseThumbnailStructure(json.data);
-            $scope.$apply();
+
+            if (provider == 'facebook') {
+                async.map(json.data, function (photo, mapCb) {
+                    hello(provider).api('me/photo', {id: photo.id, fields: 'images,picture,from,album'}).then(
+                        function(result) {
+                            photo.pictures = result.images;
+                            photo.picture = result.images[0].source;
+                            photo.thumbnail = result.picture;
+                            photo.album = result.album || {};
+                            photo.from = result.from;
+                            mapCb(null, photo);
+                        },
+                        function(err) {
+                            mapCb(err, photo);
+                        }
+                    );
+                }, function() {
+                    $scope.returnJson = json;
+                    $scope.parseThumbnailStructure(json.data);
+                    $scope.$apply();
+                });
+            } else {
+                $scope.returnJson = json;
+                $scope.parseThumbnailStructure(json.data);
+                $scope.$apply();
+            }
         }, function(e) {
             $scope.errorMessage = e.error.message;
             $scope.$apply();
